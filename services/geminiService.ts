@@ -1,19 +1,11 @@
 import { GoogleGenAI } from "@google/genai";
 
-const getGeminiClient = () => {
-  const apiKey = process.env.API_KEY;
-  if (!apiKey) {
-    throw new Error("API_KEY environment variable is missing");
-  }
-  return new GoogleGenAI({ apiKey });
-};
-
 export const generateDepthEffect = async (
   base64Image: string,
   mimeType: string
 ): Promise<string> => {
   try {
-    const ai = getGeminiClient();
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     
     // Using gemini-2.5-flash-image as it is efficient and capable of image editing tasks
     const modelId = 'gemini-2.5-flash-image'; 
